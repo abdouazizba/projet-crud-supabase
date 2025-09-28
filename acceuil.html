@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD SUPABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white">
+
+    
+    <!-- Header avec navigation -->
+    <header class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-lg shadow-lg">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- logo style developpeur du site en jaune  -->
+                <i class="fas fa-code text-yellow-400 text-3xl"></i>
+                <span class="text-2xl font-bold">ABDOU AZIZ BA</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a id="linktohome" class="hover:text-yellow-400 transition">Accueil</a>
+                <div class="auth-buttons">
+                    <button id="openLoginModal" class="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 px-4 py-2 rounded-lg font-medium transition">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Se connecter
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+
+<!-- Modal d'authentification -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2 id="authTitle">Connexion</h2>
+                <button class="close-btn" id="closeAuthModal">&times;</button>
+            </div>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Connexion</div>
+                <div class="auth-tab" data-tab="register">Inscription</div>
+            </div>
+            
+            <!-- Formulaire de connexion -->
+            <form class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Adresse email</label>
+                    <input type="email" id="loginEmail" placeholder="name@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Se souvenir de moi</label>
+                    </div>
+                    <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn">Se connecter</button>
+                
+                <div class="auth-switch">
+                    Pas encore de compte ? <a id="switchToRegister">S'inscrire</a>
+                </div>
+            </form>
+            
+            <!-- Formulaire d'inscription -->
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Votre nom</label>
+                    <input type="text" id="registerName" placeholder="Nom" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Adresse email</label>
+                    <input type="email" id="registerEmail" placeholder="name@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe</label>
+                    <input type="password" id="registerPassword" placeholder="Mot de passe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="registerConfirmPassword" placeholder="Confirmer le mot de passe" required>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="btn-signUp">S'inscrire</button>
+                
+                <div class="auth-switch">
+                    Déjà un compte ? <a id="switchToLogin">Se connecter</a>
+                </div>
+            </form>
+        </div>
+    </div>
+<!-- Fin du modal d'authentification -->
+
+
+<!-- section du profil -->
+
+<section id="profileSection" class="hidden">
+
+        <main class="container mx-auto px-4 py-8 bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-8">Mon Profil</h1>
+            
+            <!-- Carte de profil -->
+            <div class="profile-card p-8 mb-8">
+                <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                    <!-- Avatar et actions -->
+                    <div class="text-center md:text-left">
+                        <div class="avatar-upload mb-4">
+                            <img id="avatarPreview" src="https://www.shutterstock.com/image-vector/blank-avatar-photo-icon-design-600nw-1682415103.jpg" alt="Avatar" class="avatar-preview">
+                        </div>
+                    </div>
+                    
+                    <!-- Informations du profil -->
+                    <div class="flex-1">
+                        <form id="profileForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Nom d'utilisateur</label>
+                                    <input type="text" id="username" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-yellow-400" placeholder="Votre nom d'utilisateur">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Nom complet</label>
+                                    <input type="text" id="fullName" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-yellow-400" placeholder="Votre nom complet">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full bg-gray-600 border border-gray-500 rounded-lg px-4 py-3 focus:outline-none focus:border-yellow-400" readonly>
+                                <p class="text-sm text-gray-400 mt-1">L'email ne peut pas être modifié</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Bio</label>
+                                <textarea id="bio" rows="4" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-yellow-400" placeholder="Parlez-nous de vous..."></textarea>
+                            </div>
+                            
+                            <div class="flex space-x-4">
+                                <button type="submit" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-medium transition">
+                                    <i class="fas fa-save mr-2"></i>Enregistrer les modifications
+                                </button>
+                                <button type="button" id="cancelBtn" class="bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-lg font-medium transition">
+                                    <i class="fas fa-times mr-2"></i>Annuler
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section statistiques -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gray-800 rounded-lg p-6 text-center">
+                    <i class="fas fa-calendar-check text-yellow-400 text-3xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Membre depuis</h3>
+                    <p id="memberSince" class="text-gray-300">Chargement...</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 text-center">
+                    <i class="fas fa-sync-alt text-yellow-400 text-3xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Dernière mise à jour</h3>
+                    <p id="lastUpdate" class="text-gray-300">Chargement...</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 text-center">
+                    <i class="fas fa-user-edit text-yellow-400 text-3xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Statut du profil</h3>
+                    <p id="profileStatus" class="text-gray-300">Complet</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</section>
+
+
+    <!-- Contenu principal -->
+    <main class="container mx-auto px-4 py-8 ">
+        <!-- Section Accueil -->
+        <section id="home-section" class="mb-12 ">
+            <!-- Section Présentation du projet -->
+            <div class="bg-gray-800 rounded-xl p-8 mb-12 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-center">Présentation du Projet</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Technologies utilisées</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span><strong>Frontend:</strong> HTML, CSS (Tailwind), JavaScript</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span><strong>Backend:</strong> Supabase (Backend as a Service)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span><strong>Base de données:</strong> PostgreSQL avec Row Level Security</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span><strong>Authentification:</strong> Système d'authentification Supabase</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Fonctionnalités implémentées</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-user-plus text-yellow-400 mt-1 mr-2"></i>
+                                <span><strong>Inscription:</strong> Création de compte utilisateur</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-sign-in-alt text-yellow-400 mt-1 mr-2"></i>
+                                <span><strong>Connexion/Déconnexion:</strong> Gestion des sessions utilisateur</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-user-edit text-yellow-400 mt-1 mr-2"></i>
+                                <span><strong>Gestion de profil:</strong> CRUD complet sur les profils utilisateurs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-yellow-400 mt-1 mr-2"></i>
+                                <span><strong>Sécurité:</strong> Politiques RLS pour protéger les données</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-8 bg-gray-700 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-3">Structure de la base de données</h3>
+                    <p class="text-gray-300 mb-4">
+                        La table <code class="bg-gray-900 px-2 py-1 rounded">profiles</code> a été créée avec les champs suivants :
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-gray-900 rounded-lg">
+                            <thead>
+                                <tr class="border-b border-gray-700">
+                                    <th class="py-2 px-4 text-left">Champ</th>
+                                    <th class="py-2 px-4 text-left">Type</th>
+                                    <th class="py-2 px-4 text-left">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-700">
+                                    <td class="py-2 px-4">id</td>
+                                    <td class="py-2 px-4">UUID</td>
+                                    <td class="py-2 px-4">Clé primaire, liée à l'utilisateur d'authentification</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="py-2 px-4">username</td>
+                                    <td class="py-2 px-4">text</td>
+                                    <td class="py-2 px-4">Nom d'utilisateur unique</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="py-2 px-4">full_name</td>
+                                    <td class="py-2 px-4">text</td>
+                                    <td class="py-2 px-4">Nom complet de l'utilisateur</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4">updated_at</td>
+                                    <td class="py-2 px-4">timestamp</td>
+                                    <td class="py-2 px-4">Date de dernière mise à jour</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-t from-gray-900 to-gray-800 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2025 Abdou Aziz BA. Tous droits réservés.</p>
+            <p class="text-gray-500 text-sm mt-2">Projet de fin de session - Application CRUD avec Supabase</p>
+        </div>
+    </footer>
+
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="auth.js"></script>
+    
+</body>
+</html>

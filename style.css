@@ -1,0 +1,438 @@
+/* Palette de gradients */
+.gradient-primary {
+    background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+}
+
+.gradient-card {
+    background: linear-gradient(135deg, #1F2937 0%, #374151 50%, #1F2937 100%);
+}
+
+.gradient-premium {
+    background: linear-gradient(135deg, #1F2937 0%, #4B5563 50%, #374151 100%);
+}
+
+
+
+
+
+
+.active-nav {
+    border-bottom: 2px solid #3b82f6;
+    color: #3b82f6;
+}
+.modal {
+            transition: opacity 0.3s ease;
+}
+.modal-content {
+    transform: scale(0.7);
+    transition: transform 0.3s ease;
+}
+.modal.active .modal-content {
+    transform: scale(1);
+}
+.auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .login-btn {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #ffffff;
+            color: #0f0f0f;
+        }
+        
+        /* Contenu principal */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1489599809519-d5c4d1d2e58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .watch-now-btn {
+            background-color: #ff3e3e;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .watch-now-btn:hover {
+            background-color: #ff1e1e;
+        }
+        
+        /* Modal d'authentification */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .auth-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .auth-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-header h2 {
+            color: #ffffff;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .auth-tab.active {
+            border-bottom: 2px solid #ff3e3e;
+            color: #ff3e3e;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #cccccc;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #ffffff;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff3e3e;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .forgot-password {
+            color: #ff3e3e;
+            text-decoration: none;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #ff3e3e;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff1e1e;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #cccccc;
+        }
+        
+        .auth-switch a {
+            color: #ff3e3e;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        /* Section films/séries */
+        .content-section {
+            padding: 4rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .content-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .content-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        
+        .content-info {
+            padding: 1rem;
+        }
+        
+        .content-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-meta {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+.success-simple {
+    text-align: center;
+    padding: 2rem;
+}
+
+.success-check {
+    font-size: 4rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.success-simple h3 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.success-simple p {
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+.btn-ok {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-ok:hover {
+    background: #45a049;
+}
+
+
+.profile-card {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .avatar-upload {
+            position: relative;
+            display: inline-block;
+        }
+        .avatar-upload input {
+            display: none;
+        }
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #f59e0b;
+            object-fit: cover;
+        }
+        .edit-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #f59e0b;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+/* Styles pour les messages de succès */
+.success-simple {
+    text-align: center;
+    padding: 2rem;
+}
+
+.success-check {
+    font-size: 3rem;
+    color: #10B981;
+    margin-bottom: 1rem;
+}
+
+.btn-ok {
+    background-color: #10B981;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-ok:hover {
+    background-color: #059669;
+}
+
+/* Styles pour la section profil */
+.profile-card {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-upload input {
+    display: none;
+}
+
+.avatar-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #f59e0b;
+    object-fit: cover;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #f59e0b;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
